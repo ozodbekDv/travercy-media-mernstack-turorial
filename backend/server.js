@@ -4,10 +4,19 @@ const dotenv = require("dotenv").config();
 const port = process.env.PORT || 5000;
 const { errorHandler } = require("./middleware/errorMiddleware");
 const connectDb = require("./config/db");
+const cors = require("cors");
 
 connectDb();
 
 const app = express();
+
+// ⛔ CORS middleware har doim BIRINCHI bo‘lishi kerak
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
